@@ -28,7 +28,7 @@ public class Application1 {
             while (rset.next()) {
                 // ResultSet의 커서 위치를 하나 내리면서 행이 존재하면 true, 아니면 false
 
-                System.out.println(rset.getString("emp_id" + ", " + rset.getString("emp_name")));
+                System.out.println(rset.getString("emp_id") + ", " + rset.getString("emp_name"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
