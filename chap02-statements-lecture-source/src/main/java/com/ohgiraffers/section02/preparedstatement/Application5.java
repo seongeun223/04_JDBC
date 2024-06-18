@@ -26,11 +26,11 @@ public class Application5 {
         ResultSet rset = null;
 
         // 조회할 employee의 이름의 성을 받아서 찾기
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("조회할 이름의 성을 입력하세요 : ");
-
-        String empName = sc. nextLine();
+//        Scanner sc = new Scanner(System.in);
+//
+//        System.out.println("조회할 이름의 성을 입력하세요 : ");
+//
+//        String empName = sc. nextLine();
 
         // concat(?, '%') => ?로 시작하는 것
 //        String query = "select * from employee where emp_name like concat(?, '%')";
@@ -46,11 +46,12 @@ public class Application5 {
             prop.loadFromXML(new FileInputStream("src/main/java/com/ohgiraffers/section02/preparedstatement/employee-query.xml"));
 
             // 쿼리문에 키 값 넣어주기
-            String query = prop.getProperty("selectEmpByFamilyName");
+            String query = prop.getProperty("selectEmpByFamily");
+            //String query = prop.getProperty("selectEmpByFamilyName");
 
             pstmt = con.prepareStatement(query);
 
-            pstmt.setString(1, empName);
+//            pstmt.setString(1, empName);
 
             rset = pstmt.executeQuery();
 
