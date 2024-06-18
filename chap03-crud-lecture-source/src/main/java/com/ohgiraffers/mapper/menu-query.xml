@@ -21,4 +21,5 @@
         from tbl_menu
         where menu_code = ?
     </entry>
+
 </properties>

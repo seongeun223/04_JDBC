@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="employee">
+        select
+        *
+        from
+        employee
+    </entry>
+    <entry key="insertEmp">
+        insert into employee (
+        emp_id,
+        emp_name,
+        emp_no,
+        email,
+        phone,
+        dept_Code,
+        job_Code,
+        sal_level,
+        salary,
+        bonus,
+        manager_id,
+        hire_Date,
+        ent_Date,
+        ent_Yn
+        )
+        values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    </entry>
+</properties>
+
