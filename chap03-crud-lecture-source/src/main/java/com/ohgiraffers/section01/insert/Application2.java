@@ -1,17 +1,17 @@
 package com.ohgiraffers.section01.insert;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.util.Scanner;
 
 import static com.ohgiraffers.common.JDBCTemplate.close;
 import static com.ohgiraffers.common.JDBCTemplate.getConnection;
 
-public class Application1 {
+public class Application2 {
 
     public static void main(String[] args) {
 
@@ -19,13 +19,9 @@ public class Application1 {
 
         PreparedStatement pstmt = null;
 
-        /*
-        * insert,update,delete의 반환받기 성공한 행의 개수를 반환해준다. => 정수형태
-        * 0은 아무런 변화가 없을 때
-        * */
         int result = 0;
 
-        // 쿼리문을 읽어올 Properties 객체
+
         Properties prop = new Properties();
 
         try {
@@ -36,12 +32,26 @@ public class Application1 {
 
             pstmt = con.prepareStatement(query);
 
-            pstmt.setString(1, "봉골레청국장");
-            pstmt.setInt(2, 50000);
-            pstmt.setInt(3, 1);
-            pstmt.setString(4, "Y");
+            Scanner sc = new Scanner(System.in);
 
-            // insert, update, delete 할 때는 executeUpdate() 사용한다.
+            System.out.println("메뉴의 이름을 입력하세요 : ");
+            String menuName = sc. nextLine();
+
+            System.out.println("메뉴 가격을 입력하세요 : ");
+            int menuPrice = sc. nextInt();
+
+            System.out.println("카테고리 코드를 입력하세요 : ");
+            int caategoryCode = sc. nextInt();
+
+            System.out.println("판매여부를 입력하세요(Y/N) : ");
+            sc. nextLine();
+            String orderableStatus = sc. nextLine().toUpperCase();
+
+            pstmt.setString(1, menuName);
+            pstmt.setInt(2, menuPrice);
+            pstmt.setInt(3, caategoryCode);
+            pstmt.setString(4, orderableStatus);
+
             result = pstmt.executeUpdate();
 
 

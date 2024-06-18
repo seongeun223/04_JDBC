@@ -1,5 +1,7 @@
 package com.ohgiraffers.section01.insert;
 
+import com.ohgiraffers.model.MenuDTO;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -11,7 +13,7 @@ import java.util.Scanner;
 import static com.ohgiraffers.common.JDBCTemplate.close;
 import static com.ohgiraffers.common.JDBCTemplate.getConnection;
 
-public class Application2 {
+public class Application3 {
 
     public static void main(String[] args) {
 
@@ -47,10 +49,18 @@ public class Application2 {
             sc. nextLine();
             String orderableStatus = sc. nextLine().toUpperCase();
 
-            pstmt.setString(1, menuName);
-            pstmt.setInt(2, menuPrice);
-            pstmt.setInt(3, caategoryCode);
-            pstmt.setString(4, orderableStatus);
+            MenuDTO newMenu = new MenuDTO();
+            newMenu.setMenuName(menuName);
+            newMenu.setMenuPrice(menuPrice);
+            newMenu.setCategoryCode(caategoryCode);
+            newMenu.setOrderableStatus(orderableStatus);
+
+            /*------------------------ 다른 클래스 -------------------------*/
+
+            pstmt.setString(1, newMenu.getMenuName());
+            pstmt.setInt(2, newMenu.getMenuPrice());
+            pstmt.setInt(3, newMenu.getCategoryCode());
+            pstmt.setString(4, newMenu.getOrderableStatus());
 
             result = pstmt.executeUpdate();
 
