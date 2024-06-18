@@ -53,9 +53,9 @@ public class Application {
             throw new RuntimeException(e);
         } finally {
 
-            close(con);
-            close(stmt);
             close(rset);
+            close(stmt);
+            close(con);
 
             for(ClassDTO cls : clsList) {
                 System.out.println(cls);
