@@ -1,14 +1,15 @@
-package com.ohgiraffers.section02;
+package com.ohgiraffers.section02.preparedstatement;
 
 import com.ohgiraffers.model.dto.EmployeeDTO;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import static com.ohgiraffers.common.JDBCTemplate.close;
 import static com.ohgiraffers.common.JDBCTemplate.getConnection;
@@ -32,12 +33,21 @@ public class Application5 {
         String empName = sc. nextLine();
 
         // concat(?, '%') => ?로 시작하는 것
-        String query = "select * from employee where emp_name like concat(?, '%')";
+//        String query = "select * from employee where emp_name like concat(?, '%')";
 
         EmployeeDTO row = null;
         List<EmployeeDTO> empList = null;
 
+        Properties prop = new Properties();
+
         try {
+
+            // 경로설정
+            prop.loadFromXML(new FileInputStream("src/main/java/com/ohgiraffers/section02/preparedstatement/employee-query.xml"));
+
+            // 쿼리문에 키 값 넣어주기
+            String query = prop.getProperty("selectEmpByFamilyName");
+
             pstmt = con.prepareStatement(query);
 
             pstmt.setString(1, empName);
@@ -68,6 +78,12 @@ public class Application5 {
             }
 
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidPropertiesFormatException e) {
+            throw new RuntimeException(e);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
             close(rset);
