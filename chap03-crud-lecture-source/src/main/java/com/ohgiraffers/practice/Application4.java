@@ -4,15 +4,16 @@ import com.ohgiraffers.model.EmployeeDTO;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Properties;
+import java.util.Scanner;
 
 import static com.ohgiraffers.common.EmployeeTemplate.close;
 import static com.ohgiraffers.common.EmployeeTemplate.getConnection;
 
-public class Application2 {
+public class Application4 {
 
     /*
     * Employee
@@ -29,32 +30,26 @@ public class Application2 {
 
         PreparedStatement pstmt = null;
 
-        int result = 0;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("ID를 입력하세요 : ");
+        String empId = sc.nextLine();
+        System.out.println("회원 이름을 입력하세요 : ");
+        String empName = sc.nextLine();
 
+        String query = "select * from employee where emp_id =? and emp_name =?";
+        System.out.println(query);
 
         Properties prop = new Properties();
 
         try {
             prop.loadFromXML(new FileInputStream("src/main/java/com/ohgiraffers/mapper/employee_query.xml"));
 
-            String query = prop.getProperty("insertEmp");
+
+
 
             pstmt = con.prepareStatement(query);
+            pstmt.setString(1, empId);
 
-           pstmt.setString(1, "223");
-           pstmt.setString(2, "장만식");
-           pstmt.setString(3, "010110-1234561");
-           pstmt.setString(4, "mansik@greedy.com");
-           pstmt.setString(5, "01013244589");
-           pstmt.setString(6, "D3");
-           pstmt.setString(7, "J2");
-           pstmt.setString(8, "S6");
-           pstmt.setDouble(9, 1500000);
-           pstmt.setDouble(10, 0.15);
-           pstmt.setString(11, "214");
-           pstmt.setDate(12, Date.valueOf("2013-05-16"));
-           pstmt.setDate(13, null);
-           pstmt.setString(14, "N");
 
            result = pstmt.executeUpdate();
 
@@ -69,12 +64,12 @@ public class Application2 {
         }
 
         if(result > 0) {
-            System.out.println("사원 저장 성공");
+            System.out.println("사원 삭제 성공");
         } else {
-            System.out.println("사원 저장 실패");
+            System.out.println("사원 삭제 실패");
         }
 
-        // 	223	장만식	010110-1234561	mansik@greedy.com	01013244589	D3	J2	S6	1500000	0.15	214	2013-05-16		N
+
 
 
     }

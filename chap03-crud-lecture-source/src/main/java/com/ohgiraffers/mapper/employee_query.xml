@@ -26,5 +26,17 @@
         )
         values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     </entry>
+    <entry key="updateEmp">
+        update employee
+        set emp_name = ?,
+        dept_code = ?,
+        salary = ?
+        where emp_id = ?
+    </entry>
+    <entry key="deleteEmp">
+        delete
+        from employee
+        where emp_id = ?
+    </entry>
 </properties>
 

@@ -50,6 +50,7 @@ public class Application3 {
         Double salary = sc.nextDouble();
 
         EmployeeDTO changeEmp = new EmployeeDTO();
+        changeEmp.setEmpId(empId);
         changeEmp.setEmpName(empName);
         changeEmp.setDeptCode(deptCode);
         changeEmp.setSalary(salary);
@@ -57,14 +58,14 @@ public class Application3 {
         try {
             prop.loadFromXML(new FileInputStream("src/main/java/com/ohgiraffers/mapper/employee_query.xml"));
 
-            String query = prop.getProperty("insertEmp");
+            String query = prop.getProperty("updateEmp");
 
             pstmt = con.prepareStatement(query);
 
-           pstmt.setString(1, changeEmp.getEmpId());
-           pstmt.setString(2, changeEmp.getEmpName());
-           pstmt.setString(3, changeEmp.getDeptCode());
-           pstmt.setString(4, changeEmp.getSalary());
+           pstmt.setString(1, changeEmp.getEmpName());
+           pstmt.setString(2, changeEmp.getDeptCode());
+           pstmt.setDouble(3, changeEmp.getSalary());
+           pstmt.setString(4, changeEmp.getEmpId());
 
 
            result = pstmt.executeUpdate();
@@ -84,6 +85,8 @@ public class Application3 {
         } else {
             System.out.println("사원 저장 실패");
         }
+
+        // 	223	송춘식	010110-1234561	mansik@greedy.com	01013244589	D8	J2	S6	1750000	0.15	214	2013-05-16		N
 
 
     }
